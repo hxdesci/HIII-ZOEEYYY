@@ -1,0 +1,373 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+
+#envelope {
+    position: relative;
+    height: 200px;  /* Increased from 180px */
+    width: 320px;   /* Increased from 280px */
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    top: 40%;
+    background-color: #ff2a22;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#envelope:hover {
+    cursor: pointer;
+}
+
+.front {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 3;
+}
+
+.flap {
+    border-top: 110px solid #ff2a22;     /* Increased from 98px */
+    border-left: 160px solid transparent; /* Increased from 140px */
+    border-right: 160px solid transparent;/* Increased from 140px */
+    border-bottom: 90px solid transparent;/* Increased from 82px */
+    transform-origin: top;
+}
+
+.pocket {
+    border-left: 160px solid #ff748d;    /* Increased from 140px */
+    border-right: 160px solid #ff748d;   /* Increased from 140px */
+    border-bottom: 100px solid #ff98a7;  /* Increased from 90px */
+    border-top: 100px solid transparent; /* Increased from 90px */
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.letter {
+    position: relative;
+    background-color: white;
+    width: 90%;
+    height: 75%;  /* Reduced from 95% to make letter shorter */
+    top: 10%;    /* Adjusted from 2% to center the shorter letter */
+    border-radius: 10px;
+    box-shadow: 0 2px 26px rgba(0, 0, 0, .12);
+    margin: 0 auto;
+    padding: 15px;
+    visibility: hidden;
+    z-index: 1;
+    transform: translatey(20px);
+}
+
+/* Adjust text positions for shorter letter */
+.line1 {
+    top: 15%;
+}
+
+.line2 {
+    top: 30%;
+}
+
+.line3 {
+    top: 45%;
+}
+
+.line4 {
+    top: 65%; /* Reduced from 75% to fit in shorter letter */
+    text-align: center; /* Center the signature */
+}
+
+.words {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%; /* Reduced width to prevent overflow */
+    text-align: left;
+    font-size: 13px; /* Slightly smaller font */
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.line1 {
+    top: 15%;
+}
+.line2 {
+    top: 30%;
+}
+.line3 {
+    top: 45%;
+}
+.line4 {
+    top: 70%;
+    text-align: right;
+}
+
+.open .letter {
+    transform: translatey(-120px);
+    transition: transform 0.4s 0.6s ease, visibility 0s 0.6s;
+    z-index: 2;
+    visibility: visible; /* Show letter when opened */
+}
+
+.close .letter {
+    transform: translatey(0);
+    transition: transform 0.4s ease, visibility 0s;
+    z-index: 1;
+    visibility: hidden; /* Hide letter when closed */
+}
+
+.open .flap {
+    transform: rotateX(180deg);
+    transition: transform 0.4s ease, z-index 0.6s;
+    z-index: 1;
+}
+
+.close .flap {
+    transform: rotateX(0deg);
+    transition: transform 0.4s 0.6s ease, z-index 0.6s;
+    z-index: 3;
+}
+
+.hearts {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.heart {
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+}
+
+.heart:before, .heart:after {
+    position: absolute;
+    content: "";
+    background: #d00000;
+    width: 50px;
+    height: 80px;
+    left: 50px;
+    top: 0;
+    border-radius: 50px 50px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.heart:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+.close .heart {
+    opacity: 0;
+    animation: none;
+}
+
+.a1 {
+    left: 20%;
+    transform: scale(0.6);
+    opacity: 1;
+    animation: slideUp 4s linear 1, sideSway 2s  ease-in-out 4 alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
+}
+.a2 {
+    left: 55%;
+    transform: scale(1);
+    opacity: 1;
+    animation: slideUp 5s linear 1, sideSway 4s  ease-in-out 2 alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
+}
+.a3 {
+    left: 10%;
+    transform: scale(0.8);
+    opacity: 1;
+    animation: slideUp 7s linear 1, sideSway 2s  ease-in-out 6 alternate;
+    animation-fill-mode: forwards;
+    animation-delay: 0.7s;
+}
+
+@keyframes slideUp {
+    0% {
+    top: 0;
+    }
+    100% {
+        top: -600px;
+    }
+}
+
+@keyframes sideSway {
+    0% {
+        margin-left: 0px;
+    }
+    100% {
+        margin-left: 50px;
+    }
+}
+
+.reset {
+    text-align: center;
+}
+
+.reset button {
+    font-weight: 800;
+    font-style: normal;
+    transition: all 0.1s linear;
+    background-color: transparent;
+    border: solid 2px #FF6863;
+    border-radius: 4px;
+    color: #FF6863;
+    display: inline-block;
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 20px;
+    margin-top: 110px;
+    padding: 10px;
+    line-height: 2em;
+    text-decoration: none;
+    min-width: 150px;
+    outline: none;
+}
+
+.reset button:hover {
+    background-color: #FF6863;
+    cursor: pointer;
+    color: white;
+}
+
+.valentine {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color:rgb(20, 20, 20);
+    font-size: 30px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff5f5;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    border: 2px solid #ff69b4;
+    min-width: 300px;
+}
+
+.popup-content h2 {
+    color: #ff69b4;
+    font-family: 'Arial', cursive;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.popup-buttons {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#yesButton, #noButton {
+    padding: 10px 30px;
+    border: 2px solid #ff69b4;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background-color: white;
+    color: #ff69b4;
+}
+
+#yesButton:hover {
+    background-color: #ff69b4;
+    color: white;
+    transform: scale(1.05);
+}
+
+#noButton:hover {
+    transform: translateX(10px);
+}
+
+#noButton {
+    position: relative;
+    z-index: 1001;
+}
+
+.tiktok-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff5f5;
+    padding: 20px 30px;
+    border-radius: 15px;
+    border: 2px solid #ff69b4;
+    color: #ff69b4;
+    font-size: 18px;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
+    z-index: 2000;
+}
+
+.popup-hearts {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.popup-hearts .heart {
+    width: 20px;
+    height: 20px;
+    background-color: #ff69b4;
+    transform: rotate(45deg);
+    position: relative;
+}
+
+.popup-hearts .heart:before,
+.popup-hearts .heart:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: #ff69b4;
+    border-radius: 50%;
+    position: absolute;
+}
+
+.popup-hearts .heart:before {
+    left: -10px;
+}
+
+.popup-hearts .heart:after {
+    top: -10px;
+}

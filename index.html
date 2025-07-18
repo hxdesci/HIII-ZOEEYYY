@@ -1,204 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HI ZOEYYYYY</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      background-color: #1a1a1a;
-      color: #f5f5f5;
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-      padding: 20px;
-      line-height: 1.6;
-      max-width: 600px;
-      margin: auto;
-    }
-    #story {
-      white-space: pre-wrap;
-      word-break: break-word;
-      overflow-y: auto;
-      max-height: 70vh;
-      margin-bottom: 20px;
-    }
-    button {
-      margin: 5px;
-      padding: 10px 20px;
-      background-color: #333;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    input[type="text"] {
-      padding: 8px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-      width: 200px;
-    }
-  </style>
-</head>
-<body>
-  <div id="story"></div>
-  <div id="inputArea"></div>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <title>Virtual Valentine's Day Card</title>
 
-  <script>
-    const story = document.getElementById("story");
-    const inputArea = document.getElementById("inputArea");
-    let userName = "";
-
-    function typeText(text, callback, delay = 35) {
-      if (!text || typeof text !== 'string') {
-        console.error('Invalid text input');
-        return;
-      }
-
-      let i = 0;
-      let currentText = story.innerHTML;
-      
-      // Only add newlines if there's existing content
-      if (currentText && !currentText.endsWith('\n\n')) {
-        currentText += '\n\n';
-      }
-      
-      function typing() {
-        if (i < text.length) {
-          const char = text.charAt(i);
-          currentText += char;
-          story.innerHTML = currentText;
-          story.scrollTop = story.scrollHeight;
-          i++;
-          setTimeout(typing, delay);
-        } else {
-          if (typeof callback === 'function') {
-            setTimeout(callback, delay);
-          }
-        }
-      }
-      typing();
-    }
-
-    function getName() {
-      typeText("The wind carries a soft whisper through your room...", () => {
-        typeText("A voice gently asks, what's your name?", () => {
-          inputArea.innerHTML = '<input type="text" id="nameInput" placeholder="Enter your name"> <button onclick="saveName()">Submit</button>';
-        });
-      });
-    }
-
-    function saveName() {
-      const input = document.getElementById("nameInput");
-      userName = input.value || "you";
-      inputArea.innerHTML = "";
-      typeText(`Welcome, ${userName}!`, startStory);
-    }
-
-    function startStory() {
-      typeText("You awaken in a floating cottage above the clouds — a place that feels pulled from a dream.", () => {
-        typeText("Everything is bathed in soft twilight, your blanket is the color of night skies, and the scent of fresh fruit fills the air.", () => {
-          typeText("On a small wooden table, there's a warm mug of Milo, and your sketchbook rests beside it, waiting for your hands.\n", () => {
-            typeText("What would you like to do?", () => {
-              inputArea.innerHTML = `
-                <button onclick="sketchPath()">1) Sketch the stars</button>
-                <button onclick="readPath()">2) Read by the fireplace</button>
-                <button onclick="moviePath()">3) Watch Spirited Away</button>
-              `;
-            });
-          });
-        });
-      });
-    }
-
-    function sketchPath() {
-      inputArea.innerHTML = "";
-      typeText("\nYou curl up on the moonlit balcony and start sketching the sky.", () => {
-        typeText("You see shapes in the clouds — a train running across stars, a bathhouse floating above the trees.", () => {
-          typeText("\nSuddenly, your pencil stops.", () => {
-            typeText("A small envelope rests on your lap. You don't remember it being there.", () => {
-              typeText("Do you open the envelope?", () => {
-                inputArea.innerHTML = `
-                  <button onclick="ending()">1) Yes 💌</button>
-                  <button onclick="noMagic()">2) No, keep sketching</button>
-                `;
-              });
-            });
-          });
-        });
-      });
-    }
-
-    function readPath() {
-      inputArea.innerHTML = "";
-      typeText("\nThe room glows softly as you play your favorite music.", () => {
-        typeText("You open a book — it's unfamiliar but feels like it's always been yours.", () => {
-          typeText("Tucked inside is a letter with a black ribbon, sealed with a wax imprint of a soot sprite.", () => {
-            typeText("Do you open the letter?", () => {
-              inputArea.innerHTML = `
-                <button onclick="ending()">1) Yes 💌</button>
-                <button onclick="noMagic()">2) No, keep reading</button>
-              `;
-            });
-          });
-        });
-      });
-    }
-
-    function moviePath() {
-      inputArea.innerHTML = "";
-      typeText("\nYou wrap yourself in your softest blanket and press play.", () => {
-        typeText("Spirited Away begins, and the familiar sounds of the train on water fill your soul with peace.", () => {
-          typeText("You sip your Milo, and the world seems to fade into magic.", () => {
-            typeText("\nHalfway through, you spot something strange.", () => {
-              typeText("A letter... tucked under your mug. With your name on it.", () => {
-                typeText("Do you open the letter?", () => {
-                  inputArea.innerHTML = `
-                    <button onclick="ending()">1) Yes 💌</button>
-                    <button onclick="noMagic()">2) No, keep watching</button>
-                  `;
-                });
-              });
-            });
-          });
-        });
-      });
-    }
-
-    function noMagic() {
-      inputArea.innerHTML = "";
-      typeText("You continue, but something magical has shifted in the air...");
-    }
-
-    function ending() {
-      inputArea.innerHTML = "";
-      typeText("\nYou carefully open the envelope. It reads:\n", () => {
-        typeText(`Dear ${userName},\n`, () => {
-          typeText("HIII MISSS GORGEOUSSS\n", () => {
-            typeText("Kamusta??????\n", () => {
-              typeText("Sooo, I made this to ask for somethinggg\n", () => {
-                typeText("mind having a streak?? @hades.ja\nJK wanna rewatch spirited away tg?? (just guessing na youve watched it beforee)\n", () => {
-                  typeText("I will treat you milo if you did :v\n", () => {
-                    typeText("Sincerely,\n", () => {
-                      typeText("ADAM POGI", () => {
-                        // Add final buttons or actions here if needed
-                        inputArea.innerHTML = `
-                          <button onclick="window.location.reload()">Start Over</button>
-                        `;
-                      });
-                    });
-                  });
-                });
-              });
-            });
-          });
-        });
-      });
-    }
-
-    getName();
-  </script>
-</body>
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <h1 class="valentine"></h1>
+        <div class="envelope-wrapper">
+            <div id="envelope" class="close">
+                <div class="front flap"></div>
+                <div class="front pocket"></div>
+                <div class="letter">
+                    <p class="words line1"></p>
+                    <p class="words line2"></p>
+                    <p class="words line3"></p>
+                    <p class="words line4"></p>
+                </div>
+                <div class="hearts">
+                    <div class="heart a1"></div>
+                    <div class="heart a2"></div>
+                    <div class="heart a3"></div>
+                </div>
+            </div>
+        </div>
+        <div class="reset">
+            <button id="open">Open</button>
+            <button id="reset">Close</button>
+        </div>
+        <div id="popup" class="popup">
+            <div class="popup-floating-hearts"></div>
+            <div class="popup-content">
+                <h2>STREAKK W ME? </h2>
+                <div class="popup-buttons">
+                    <button id="yesButton">Yes!</button>
+                    <button id="noButton">No</button>
+                </div>
+            </div>
+        </div>
+        <div id="tiktokFlash" class="tiktok-message">
+            <p>MY TTA: @hades.ja orrr Drop yours will gladly follow it !! </p>
+        </div>
+        <!-- Script JS -->
+        <script src="./script.js"></script>
+    </body>
 </html>
